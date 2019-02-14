@@ -6,7 +6,7 @@ public class ClassExam {
 	String s = "1";
 	
 	void test() {
-		System.out.println("³­ ClassExam²¨!");
+		System.out.println("ë‚œ ClassExamêº¼!");
 	}
 	
 	public static void main(String[] args) {
