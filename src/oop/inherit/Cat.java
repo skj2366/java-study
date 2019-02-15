@@ -15,7 +15,14 @@ public class Cat extends Animal {
 		dog.eat();
 		dog.sleep();
 		dog.run();
-		System.out.println();
+		
+		Animal dog2 = new Dog(9,"가을");
+		dog2.eat();
+		dog2.sleep();
+		dog2.run();
+		
+		//Dog dog = new Animal(); => 불가능 ! 
+	
 	}
 	
 }
