@@ -3,19 +3,19 @@ package exam.ex01;
 public class StringEqual {
 	public static void main(String[] args) {
 
-		/*String str1 = "abcd";  				//true
-		String str2 = new String("abcd");   //false
-		
+//		//String str1 = "abcd";  				//true
+//		//String str2 = new String("abcd");   //false
+//		
 //		String str1 = new String("abcd");   //false
 //		String str2 = "abcd";				//ture
-		
-		System.out.println(str1.equals(str2));
-		System.out.println("----------");
-		System.out.println(str1=="abcd");
-		System.out.println(str2=="abcd");
-	
-		boolean bl = str1 == "abcd";*/
-		
+//		
+//		System.out.println(str1.equals(str2));
+//		System.out.println("----------");
+//		System.out.println(str1=="abcd");
+//		System.out.println(str2=="abcd");
+//	
+//		boolean bl = str1 == "abcd";
+//		
 	////////////////////////////////////////////////////////
 		
 //		String s1 = new String("a");
