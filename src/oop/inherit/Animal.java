@@ -1,22 +1,28 @@
 package oop.inherit;
 
-public class Animal {
+public class Animal implements DoSome {
 	int age;
 	String type;
 	
-	void eat() {
+	public void eat() {
 		System.out.println(age+"살인 "+type+"이 밥을 먹다.");
 	}
 	
-	void sleep() {
+	public void sleep() {
 		System.out.println(age+"살인 "+type+"이 잠을 자다.");
 	}
 	
-	void run() {
+	public void run() {
 		System.out.println(age+"살인 "+type+"이 뛰다.");
 	}
 	
 	public static void main(String[] args) {
+		
+	}
+
+	@Override
+	public void jump() {
+		// TODO Auto-generated method stub
 		
 	}
 
