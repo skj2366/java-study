@@ -21,6 +21,10 @@ public class Overrding extends Overloading  {
 	}
 
 	public static void main(String[] args) {
+		Overloading(){
+			super.BonoBono();
+		}
+
 		BonoBono();
 		BonoBono("조개");
 		BonoBono("공사중 ","우회하시오.");

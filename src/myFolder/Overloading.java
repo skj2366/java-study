@@ -22,6 +22,7 @@ public class Overloading {
 	}
 	
 	public static void main(String[] args) {
+		super.BonoBono();
 		BonoBono();
 		BonoBono("조개");
 		BonoBono("포로리", "너부리");
