@@ -5,7 +5,7 @@ public class Methods {
 		return 0;
 	}
 	void test(String str,int a) {
-		
+		System.out.println(a + str);
 	}
 	static String getStr() {
 		return "abc";
@@ -15,9 +15,12 @@ public class Methods {
 	}
 	
 	public static void main(String[] args) {
+		Methods md = new Methods();
 		setStr("abc");
 		String str = getStr();
 		System.out.println(str);
+		md.test("d",3);
+		System.out.println(md.test(1, str));
 	}
 
 }
