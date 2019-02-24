@@ -3,7 +3,7 @@ package myFolder;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BaseBall1 {
+public class BaseBall0 {
 	
 	public static void main(String[] args) {
 		ArrayList<Integer> numList = new ArrayList<>();
