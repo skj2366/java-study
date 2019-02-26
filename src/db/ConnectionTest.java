@@ -35,7 +35,7 @@ public class ConnectionTest {
 				System.out.print(rs.getString("TITLE"));
 				System.out.print(rs.getString("REG_DATE"));
 				System.out.print(rs.getString("CONTENT"));
-				System.out.print(rs.getString(""));
+				System.out.println("");
 			}
 			System.out.println("연결성공");
 		} catch (SQLException e) {
