@@ -42,7 +42,11 @@ public class DogList {
 		for(int i=0;i<10;i++) {
 			Dog d = dogList.get(i);
 			System.out.println(d.getName() + " " + d.getAge()+ "살");
-			
+		}
+		
+		for(Dog d: dogList) {
+			System.out.println(d.getName());
+			System.out.println(d.getAge());
 		}
 		
 	}
