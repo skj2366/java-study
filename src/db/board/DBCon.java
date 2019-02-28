@@ -38,6 +38,7 @@ public class DBCon {
 			}
 		}
 		con = null;//통신사 해지
+		System.out.println(" │ " + con);
 	}
 	
 	public static void main(String[] args) {
