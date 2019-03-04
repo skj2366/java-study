@@ -10,6 +10,26 @@ public class BoardInfoVO {//VO = 밸류 오브젝트의 약자; NTT,DTO 라고�
 	private Integer biCnt;
 	private String biIsactive;
 	
+	private int uiNum;//2019.03.04
+	private String uiName;//2019.03.04
+	
+	public int getUiNum() {
+		return uiNum;
+	}
+
+	public void setUiNum(int uiNum) {
+		this.uiNum = uiNum;
+	}
+
+	public String getUiName() {
+		return uiName;
+	}
+
+	public void setUiName(String uiName) {
+		this.uiName = uiName;
+	}
+
+
 	public Integer getBiNum() {
 		return biNum;
 	}
@@ -65,15 +85,14 @@ public class BoardInfoVO {//VO = 밸류 오브젝트의 약자; NTT,DTO 라고�
 	public void setBiIsactive(String biIsactive) {
 		this.biIsactive = biIsactive;
 	}
-
+	
 	@Override
 	public String toString() {
-				
 		return "BoardInfoVO [biNum=" + biNum + ", biTitle=" + biTitle + ", biContent=" + biContent + ", biCredat="
-				+ biCredat + ", biCretim=" + biCretim + ", biCnt=" + biCnt + ", biIsactive=" + biIsactive + "]";
+				+ biCredat + ", biCretim=" + biCretim + ", biCnt=" + biCnt + ", biIsactive=" + biIsactive + ", uiNum="
+				+ uiNum + ", uiName=" + uiName + "]";
 	}
-	
-	
+
 	public static void main(String[] args) {
 			System.out.println("sss");
 	}
