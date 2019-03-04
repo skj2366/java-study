@@ -41,9 +41,9 @@ public class UserInfoVO {
 	
 	@Override
 	public String toString() {
-		return "UserInfoVO [uiName=" + uiName + ", uiId=" + uiId + ", uiPwd=" + uiPwd + ", uiEmail=" + uiEmail + "]";
+		return "UserInfoVO [uiNum=" + uiNum + ", uiName=" + uiName + ", uiId=" + uiId + ", uiPwd=" + uiPwd
+				+ ", uiEmail=" + uiEmail + "]";
 	}
-	
 	public static void main(String[] args) {
 		
 	}
