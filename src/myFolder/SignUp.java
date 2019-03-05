@@ -160,14 +160,6 @@ public class SignUp {
 		}
 	}
 	
-	public static boolean comparePassword(String pwd,String pwdConfirm) {
-		if(pwdConfirm.equals(pwd)) {
-			return true;
-		}else {
-			return false;
-		}
-	}
-	
 	public static String comparePassword() {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("PASSWORD : ");
@@ -193,6 +185,43 @@ public class SignUp {
 		return pwd;
 	}
 	
+	public static void signOut() {
+		
+	}
+	
+	public static void deleteAccount() {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("==============회원탈퇴===============");
+		System.out.print("ID : ");
+		String id = scan.nextLine();
+		
+		boolean blUser  = compareUser(id);
+		
+		String sql = "DELETE USER_INFO WHERE UI_ID = ?";
+		if(blUser == false) {
+			System.out.println("존재 하는 계정입니다.");
+			String pwd = comparePassword();
+
+			try {
+				PreparedStatement ps = DBCon.getCon().prepareStatement(sql);
+				ps.setString(1,id);
+				ps.setString(2, pwd);
+				int cnt = ps.executeUpdate();
+				if(cnt == 1) {
+					System.out.println("아이디 제거 완료");
+					System.out.println("그동안 감사했습니다.");
+				}else {
+					System.out.println("아이디 제거 실패.");
+				}
+			} catch (SQLException e) {
+				//e.printStackTrace();
+				System.out.println("아이디 제거 실패.");
+			}
+		} else {
+			System.out.println("없는 계정입니다.");
+		}
+	}
+	
 	public static void main(String[] args) {
 //		Scanner scan = new Scanner(System.in);
 		//========회원가입==============
@@ -212,8 +241,29 @@ public class SignUp {
 		//======== or ===============
 		//signIn2();
 		//========로그인  끝=============
-		signUp2();
-		signIn2();
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Hello, World");
+		String titleScan = "";
+		do {
+			System.out.println("원하시는 메뉴를 선택해주세요.");
+			System.out.println("1. Sign in");
+			System.out.println("2. Sign out(미구현)");
+			System.out.println("3. Sign up");
+			System.out.println("4. Delete Account");
+			System.out.println("5. Exit");
+			titleScan = scan.nextLine();
+			if("1".equals(titleScan)) {
+				signIn2();
+			}else if("2".equals(titleScan)) {
+				System.out.println("미구현 되었습니다. 프로그램 끄세요 그냥");
+			}else if("3".equals(titleScan)) {
+				signUp2();
+			}else if("4".equals(titleScan)) {
+				deleteAccount();
+			}else {
+				System.out.println("존재하지 않는 메뉴입니다.");
+			}
+		}while("q".equals(titleScan));
 		
 	}
 }
