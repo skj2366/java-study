@@ -15,6 +15,12 @@ public class DBCon {
 	}
 	
 	public static Connection getCon() {
+//		try {
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//		} catch (ClassNotFoundException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		if(con==null) {
 			try {
 				con = DriverManager.getConnection(URL, USER, PASSWORD);//통신사 가입 및 통화 시작
