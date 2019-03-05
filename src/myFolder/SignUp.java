@@ -43,14 +43,12 @@ public class SignUp {
 		
 		boolean blUser  = compareUser(id);
 		
-		System.out.print("PASSWORD : ");
-		String pwd = scan.nextLine();
-		System.out.print("CONFIRM PASSWORD : ");
-		String pwdConfirm = scan.nextLine();
 		String sql = "INSERT INTO USER_INFO(UI_NUM, UI_ID, UI_PWD)"
 				+ " VALUES (SEQ_UI_NUM.nextval,?,?)";
 		if(blUser == true) {
 			System.out.println("아이디 사용 가능");
+			String pwd = comparePassword();
+
 			try {
 				PreparedStatement ps = DBCon.getCon().prepareStatement(sql);
 				ps.setString(1,id);
@@ -162,6 +160,39 @@ public class SignUp {
 		}
 	}
 	
+	public static boolean comparePassword(String pwd,String pwdConfirm) {
+		if(pwdConfirm.equals(pwd)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public static String comparePassword() {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("PASSWORD : ");
+		String pwd = scan.nextLine();
+		if(pwd.equals("q")) {
+			System.out.println("회원가입 초기화면으로 돌아갑니다.");
+			signUp2();
+		}
+		System.out.print("CONFIRM PASSWORD : ");
+		String pwdConfirm = scan.nextLine();
+		if(pwdConfirm.equals("q")){
+			System.out.println("회원가입 초기화면으로 돌아갑니다.");
+			signUp2();
+		}
+
+		if(pwdConfirm.equals(pwd)) {
+			System.out.println("비밀번호 일치");
+			return pwd;
+		}else {
+			System.out.println("비밀번호 불일치");
+			pwd = comparePassword();
+		}
+		return pwd;
+	}
+	
 	public static void main(String[] args) {
 //		Scanner scan = new Scanner(System.in);
 		//========회원가입==============
@@ -179,9 +210,10 @@ public class SignUp {
 //		signIn(id,pwd);
 //		System.out.println(signIn(id,pwd));
 		//======== or ===============
-		signIn2();
+		//signIn2();
 		//========로그인  끝=============
-		
+		signUp2();
+		signIn2();
 		
 	}
 }
