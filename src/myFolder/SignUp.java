@@ -9,6 +9,8 @@ import myFolder.baseball.DBCon;
 
 public class SignUp {
 
+	public String UserName = "";
+	
 //	public static void signUp(String user, String pwd) {
 //		boolean blUser  = compareUser(user);
 //		String sql = "INSERT INTO USER_INFO(UI_NUM, UI_ID, UI_PWD)"
@@ -38,6 +40,8 @@ public class SignUp {
 	public static void signUp2() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("==============회원가입===============");
+		System.out.println("====q를 입력하면 초기화면으로 되돌아갑니다.====");
+		
 		System.out.print("ID : ");
 		String id = scan.nextLine();
 		
@@ -47,7 +51,7 @@ public class SignUp {
 				+ " VALUES (SEQ_UI_NUM.nextval,?,?)";
 		if(blUser == true) {
 			System.out.println("아이디 사용 가능");
-			String pwd = comparePassword();
+			String pwd = comparePassword("signUp");
 
 			try {
 				PreparedStatement ps = DBCon.getCon().prepareStatement(sql);
@@ -100,13 +104,25 @@ public class SignUp {
 //		
 //	}
 	
+	@SuppressWarnings("resource")
 	public static String signIn2() {
 		
 		Scanner scan = new Scanner(System.in);
+		System.out.println("==============LogIn==============");
+		System.out.println("===q를 입력하면 메뉴화면으로 되돌아갑니다.====");
+		
 		System.out.print("ID : ");
 		String userTmp = scan.nextLine();
+		if("q".equals(userTmp)) {
+			System.out.println("메뉴 화면으로 되돌아 갑니다.");
+			return "q";
+		}
 		System.out.print("PWD : ");
 		String pwd = scan.nextLine();
+		if("q".equals(pwd)) {
+			System.out.println("메뉴 화면으로 되돌아 갑니다.");
+			return "q";
+		}
 		String pwdTmp = "";
 		String sql = "SELECT * FROM USER_INFO WHERE UI_ID = ?";
 				
@@ -118,10 +134,15 @@ public class SignUp {
 				pwdTmp = rs.getString("UI_PWD");
 			}
 			
+//			if("q".equals(userTmp) || "q".equals(pwd)) {
+//				System.out.println("메뉴 화면으로 되돌아 갑니다.");
+//				return "q";
+//			}
+			
 			if(pwd.equals(pwdTmp)) {
 				System.out.println("접속완료");
 				System.out.println("환영합니다." + userTmp + "님");
-				scan.close();
+				//scan.close();
 				//System.out.println("스캔 종료");
 			}else {
 				System.out.println("아이디 및 비밀번호를 확인해주세요.");
@@ -160,27 +181,39 @@ public class SignUp {
 		}
 	}
 	
-	public static String comparePassword() {
+	public static String comparePassword(String str) {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("PASSWORD : ");
 		String pwd = scan.nextLine();
 		if(pwd.equals("q")) {
-			System.out.println("회원가입 초기화면으로 돌아갑니다.");
-			signUp2();
+			if("signUp".equals(str)) {
+				System.out.println("회원가입 초기화면으로 돌아갑니다.");
+				signUp2();
+			}else if("deleteAccount".equals(str)) {
+				System.out.println("회원탈퇴 초기화면으로 돌아갑니다.");
+				deleteAccount();
+			}
+			
 		}
 		System.out.print("CONFIRM PASSWORD : ");
 		String pwdConfirm = scan.nextLine();
-		if(pwdConfirm.equals("q")){
-			System.out.println("회원가입 초기화면으로 돌아갑니다.");
-			signUp2();
+		if(pwdConfirm.equals("q")) {
+			if("signUp".equals(str)) {
+				System.out.println("회원가입 초기화면으로 돌아갑니다.");
+				signUp2();
+			}else if("deleteAccount".equals(str)) {
+				System.out.println("회원탈퇴 초기화면으로 돌아갑니다.");
+				deleteAccount();
+			}
+			
 		}
 
 		if(pwdConfirm.equals(pwd)) {
-			System.out.println("비밀번호 일치");
+			System.out.println("확인 비밀번호 일치");
 			return pwd;
 		}else {
-			System.out.println("비밀번호 불일치");
-			pwd = comparePassword();
+			System.out.println("확인 비밀번호 불일치");
+			pwd = comparePassword(str);
 		}
 		return pwd;
 	}
@@ -197,24 +230,25 @@ public class SignUp {
 		
 		boolean blUser  = compareUser(id);
 		
-		String sql = "DELETE USER_INFO WHERE UI_ID = ?";
+		String sql = "DELETE USER_INFO WHERE UI_ID = ? and UI_PWD = ?";
 		if(blUser == false) {
 			System.out.println("존재 하는 계정입니다.");
-			String pwd = comparePassword();
+			String pwd = comparePassword("deleteAccount");
 
 			try {
 				PreparedStatement ps = DBCon.getCon().prepareStatement(sql);
 				ps.setString(1,id);
-				ps.setString(2, pwd);
+				ps.setString(2,pwd);
 				int cnt = ps.executeUpdate();
+				System.out.println("cnt : " + cnt);
 				if(cnt == 1) {
 					System.out.println("아이디 제거 완료");
 					System.out.println("그동안 감사했습니다.");
 				}else {
-					System.out.println("아이디 제거 실패.");
+					System.out.println("비밀번호를 확인해주세요.");
 				}
 			} catch (SQLException e) {
-				//e.printStackTrace();
+				e.printStackTrace();
 				System.out.println("아이디 제거 실패.");
 			}
 		} else {
@@ -242,16 +276,19 @@ public class SignUp {
 		//signIn2();
 		//========로그인  끝=============
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Hello, World");
+		System.out.println("--------------Hello, World Ver0.0.1-----------------");
+		System.out.println("");
 		String titleScan = "";
 		do {
-			System.out.println("원하시는 메뉴를 선택해주세요.");
-			System.out.println("1. Sign in");
-			System.out.println("2. Sign out(미구현)");
-			System.out.println("3. Sign up");
-			System.out.println("4. Delete Account");
-			System.out.println("5. Exit");
+			String menuNum = "";
+			System.out.println("======== 원하시는 메뉴를 선택해주세요.========");
+			System.out.println("======== 1. Sign in ================");
+			System.out.println("======== 2. Sign out(미구현)==========");
+			System.out.println("======== 3. Sign up ================");
+			System.out.println("======== 4. Delete Account =========");
+			System.out.println("======== 5. Exit ===================");
 			titleScan = scan.nextLine();
+			menuNum = titleScan;
 			if("1".equals(titleScan)) {
 				signIn2();
 			}else if("2".equals(titleScan)) {
@@ -260,10 +297,12 @@ public class SignUp {
 				signUp2();
 			}else if("4".equals(titleScan)) {
 				deleteAccount();
-			}else {
+			}else if(!"5".equals(titleScan)){
 				System.out.println("존재하지 않는 메뉴입니다.");
 			}
-		}while("q".equals(titleScan));
+		}while(!"5".equals(titleScan));
+		
+		System.out.println("프로그램 종료");
 		
 	}
 }

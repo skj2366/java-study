@@ -12,11 +12,11 @@ final class whddls extends ehdrms{
 	}
 }
 
-class tjsals extends whddls {
-	tjsals(){
-		
-	}
-}
+//class tjsals extends whddls {
+//	tjsals(){
+//		
+//	}
+//}
 
 public class ExamClass {
 	
